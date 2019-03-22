@@ -21,23 +21,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package jaxrs;
+package jaxrs.service;
 
-import java.util.HashSet;
 import java.util.Set;
-import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 /**
  *
  * @author Len Payne <len.payne@lambtoncollege.ca>
  */
-@ApplicationPath("api")
+@javax.ws.rs.ApplicationPath("api")
 public class ApplicationConfig extends Application {
     @Override
     public Set<Class<?>> getClasses() {
-        Set<Class<?>> result = new HashSet<>();
-        result.add(ProductCodeREST.class);
-        return result;
+        Set<Class<?>> resources = new java.util.HashSet<>();
+        addRestResourceClasses(resources);
+        return resources;
+    }
+    
+    private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(jaxrs.ProductCodeREST.class);
+        resources.add(jaxrs.service.ManufacturerFacadeREST.class);
+        resources.add(jaxrs.service.ProductCodeFacadeREST.class);
+        resources.add(jaxrs.service.ProductFacadeREST.class);
     }
 }
